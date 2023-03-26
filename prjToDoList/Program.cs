@@ -1,7 +1,13 @@
-﻿internal class Program
+﻿using prjToDoList;
+
+internal class Program
 {
     private static void Main(string[] args)
     {
+        List<string> categories = new List<string>();
+        List<Person> people = new List<Person>();
+        List<Todo> toDoList = new List<Todo>();
+
         do
         {
             switch (Menu())
