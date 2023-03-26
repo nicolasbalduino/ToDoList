@@ -13,6 +13,7 @@ namespace prjToDoList
 
         public Person(string name)
         {
+            this.Id = Guid.NewGuid();
             this.Name = name;
         }
 
