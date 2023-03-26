@@ -26,7 +26,7 @@
                     break;
 
                 case 6:
-                    Console.WriteLine("Obrigado por otlizar os nossos serviços!");
+                    Console.WriteLine("Obrigado por utilizar os nossos serviços!");
                     Environment.Exit(0);
                     break;
             }
