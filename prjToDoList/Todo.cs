@@ -39,7 +39,7 @@ namespace prjToDoList
 
         public bool SetStatus()
         {
-            return Status;
+            return Status == false ? true : false;
         }
 
         public Person SetPerson()
