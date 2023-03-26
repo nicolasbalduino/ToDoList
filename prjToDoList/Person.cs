@@ -25,7 +25,7 @@ namespace prjToDoList
 
         public override string ToString()
         {
-            return Name;
+            return this.Name;
         }
     }
 }
