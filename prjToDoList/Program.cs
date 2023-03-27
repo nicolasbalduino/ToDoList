@@ -1,4 +1,4 @@
-﻿using prjToDoList;
+using prjToDoList;
 using System.Runtime.InteropServices;
 
 internal class Program
@@ -18,6 +18,7 @@ internal class Program
                     break;
 
                 case 1:
+                    //toDoList.Add(CreateToDo());
                     break;
 
                 case 2:
@@ -28,9 +29,11 @@ internal class Program
                     break;
 
                 case 4:
+                    categories.Add(CreateCategory());
                     break;
 
                 case 5:
+                    ListCategories(categories);
                     break;
 
                 case 6:
@@ -47,10 +50,63 @@ internal class Program
                     Environment.Exit(0);
                     break;
             }
+
+            Console.WriteLine("\nDigite uma tecla para continuar...");
+            Console.ReadLine();
         }
         while (true);
 
     }
+
+
+    }
+
+    static int Menu()
+    {
+        Console.Clear();
+        Console.WriteLine(" _________________________________________");
+        Console.WriteLine("|                                         |");
+        Console.WriteLine("|        Selecione a opção desejada       |");
+        Console.WriteLine("|_________________________________________|");
+        Console.WriteLine("|                                         |");
+        Console.WriteLine("|     1 - Cadastrar nova tarefa           |");
+        Console.WriteLine("|     2 - Listar tarefas cadastradas      |");
+        Console.WriteLine("|     3 - Alterar tarefa cadastrada       |");
+        Console.WriteLine("|     4 - Cadastrar nova categoria        |");
+        Console.WriteLine("|     5 - Listar Categorias               |");
+        Console.WriteLine("|     6 - Cadastrar nova pessoa           |");
+        Console.WriteLine("|     7 - Listar pessoas cadastradas      |");
+        Console.WriteLine("|     8 - sair                            |");
+        Console.WriteLine("|_________________________________________|");
+
+        int.TryParse(Console.ReadLine(), out var option); // Retorno padrão é zero! caso seja falso.
+        return option;
+    }
+   
+    //private static Todo CreateToDo()
+    //{
+    //    string description;
+    //    string category = "Importante";
+    //}
+
+    private static void ListCategories(List<string> categories)
+    {
+        if (categories.Count == 0)
+        {
+            Console.WriteLine("Nenhuma categoria cadastrada!");
+            return;
+        }
+
+        Console.WriteLine("Categorias:");
+
+        foreach (string category in categories)
+            Console.WriteLine(category);
+    }
+
+    private static string CreateCategory()
+    {
+        Console.Write("Digite o nome da nova categoria: ");
+        return Console.ReadLine();
 
     private static void PrintTasks(List<Todo> toDoList)
     {
@@ -76,27 +132,4 @@ internal class Program
         string name = Console.ReadLine();
         Person person = new(name);
         return person;
-    }
-
-    static int Menu()
-    {
-        Console.Clear();
-        Console.WriteLine(" _________________________________________");
-        Console.WriteLine("|                                         |");
-        Console.WriteLine("|        Selecione a opção desejada       |");
-        Console.WriteLine("|_________________________________________|");
-        Console.WriteLine("|                                         |");
-        Console.WriteLine("|     1 - Cadastrar nova tarefa           |");
-        Console.WriteLine("|     2 - Listar tarefas cadastradas      |");
-        Console.WriteLine("|     3 - Alterar tarefa cadastrada       |");
-        Console.WriteLine("|     4 - Cadastrar nova categoria        |");
-        Console.WriteLine("|     5 - Listar Categorias               |");
-        Console.WriteLine("|     6 - Cadastrar nova pessoa           |");
-        Console.WriteLine("|     7 - Listar pessoas cadastradas      |");
-        Console.WriteLine("|     8 - sair                            |");
-        Console.WriteLine("|_________________________________________|");
-
-        int.TryParse(Console.ReadLine(), out var option); // Retorno padrão é zero! caso seja falso.
-        return option;
-    }
 }

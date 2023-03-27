@@ -29,22 +29,29 @@ namespace prjToDoList
 
         public override string ToString()
         {
-            return $"{Id}";
+            return  $"ID: {this.Id}" +
+                    $"\nDescrição: {this.Description}" +
+                    $"\nCategoria: {this.Category}" +
+                    $"\nDono: {this.Owner}" +
+                    $"\nData de criação: {this.Created}" +
+                    $"\nData de vencimento: {this.DueDate}" +
+                    $"\nStatus: {this.Status}";
         }
 
         public string ToFile()
         {
-            return $"{Id}";
+            return  $"{this.Id}|{this.Description}|{this.Category}|{this.Owner}|" +
+                    $"{this.Created}|{this.DueDate}|{this.Status}";
         }
 
         public bool SetStatus()
         {
-            return Status;
+            return this.Status == false ? true : false;
         }
 
-        public Person SetPerson()
+        public void SetPerson(Person newOwner)
         {
-            return Owner;
+            this.Owner = newOwner;
         }
     }
 }
