@@ -108,10 +108,10 @@ internal class Program
 
     private static void PrintTasks(List<Todo> toDoList)
     {
-        Console.WriteLine("Tarefas cadastradas");
+        Console.WriteLine("Tarefas:");
         foreach (var item in toDoList)
         {
-            Console.WriteLine(toDoList.ToString());
+            Console.WriteLine(item.ToString());
         }
     }
 
@@ -120,7 +120,7 @@ internal class Program
         foreach (var item in people)
         {
             Console.WriteLine("Pessoas cadastradas:");
-            Console.WriteLine(people.ToString());
+            Console.WriteLine(item.ToString());
         }
     }
 
