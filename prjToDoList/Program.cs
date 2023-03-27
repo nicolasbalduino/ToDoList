@@ -1,17 +1,26 @@
+using Microsoft.VisualBasic;
 using prjToDoList;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
 internal class Program
 {
     private static void Main(string[] args)
     {
-        List<string> categories = LoadFileCategories();
-        List<Person> people = LoadFilePeople();
-        List<Todo> toDoList = LoadFileToDo(people);
+        string path = @"C:\\Users\\" + Environment.UserName;
 
-        
-        string path = @"C:\\Users\\" + Environment.UserName;        
-       
+        List<string> categories = LoadFileCategories(path + @"\\categorias.csv");
+        List<Person> people = LoadFilePeople(path + @"\\pessoas.csv");
+        List<Todo> toDoList = LoadFileToDo(path + @"\\tarefas.csv", people);
+
+        if(people.Count == 0)
+        {
+            people.Add(CreateNewPerson());
+        }
+        if (categories.Count == 0)
+        {
+            categories.Add(CreateCategory());
+        }            
 
         do
         {
@@ -23,7 +32,7 @@ internal class Program
 
                 case 1:
                     toDoList.Add(CreateToDo(categories, people));
-                    GenerateFile("tarefas.csv", toDoList);
+                    GenerateFile(path + @"\\tarefas.csv", toDoList);
                     break;
 
                 case 2:
@@ -35,7 +44,7 @@ internal class Program
 
                 case 4:
                     categories.Add(CreateCategory());
-                    GenerateFile("categorias.csv", categories);
+                    GenerateFile(path + @"\\categorias.csv", categories);
                     break;
 
                 case 5:
@@ -44,7 +53,7 @@ internal class Program
 
                 case 6:
                     people.Add(CreateNewPerson());
-                    GenerateFile("pessoas.csv", people);
+                    GenerateFile(path + @"\\pessoas.csv", people);
                     break;
 
                 case 7:
@@ -212,14 +221,14 @@ internal class Program
         sw.Close();
     }
 
-    private static List<string> LoadFileCategories()
+    private static List<string> LoadFileCategories(string fullpath)
     {
         List<string> categories = new List<string>();
         
-        if (!File.Exists("categorias.csv"))
+        if (!File.Exists(fullpath))
             return categories;
 
-        StreamReader sr = new StreamReader("categorias.csv");
+        StreamReader sr = new StreamReader(fullpath);
         while (!sr.EndOfStream)
         {
             categories.Add(sr.ReadLine());
@@ -229,14 +238,14 @@ internal class Program
         return categories;
     }
 
-    private static List<Person> LoadFilePeople()
+    private static List<Person> LoadFilePeople(string fullpath)
     {
         List<Person> people = new List<Person>();
 
-        if (!File.Exists("pessoas.csv"))
+        if (!File.Exists(fullpath))
             return people;
 
-        StreamReader sr = new StreamReader("pessoas.csv");
+        StreamReader sr = new StreamReader(fullpath);
         while (!sr.EndOfStream)
         {
             string[] prop = sr.ReadLine().Split('|');
@@ -251,14 +260,14 @@ internal class Program
         return people;
     }
 
-    private static List<Todo> LoadFileToDo(List<Person> people)
+    private static List<Todo> LoadFileToDo(string fullpath, List<Person> people)
     {
         List<Todo> toDo = new List<Todo>();
 
-        if (!File.Exists("tarefas.csv"))
+        if (!File.Exists(fullpath))
             return toDo;
 
-        StreamReader sr = new StreamReader("tarefas.csv");
+        StreamReader sr = new StreamReader(fullpath);
         while (!sr.EndOfStream)
         {
             string[] prop = sr.ReadLine().Split('|');
