@@ -18,6 +18,7 @@ internal class Program
 
                 case 1:
                     toDoList.Add(CreateToDo(categories, people));
+                    GenerateFile("tarefas.csv", toDoList);
                     break;
 
                 case 2:
@@ -29,6 +30,7 @@ internal class Program
 
                 case 4:
                     categories.Add(CreateCategory());
+                    GenerateFile("categorias.csv", categories);
                     break;
 
                 case 5:
@@ -37,6 +39,7 @@ internal class Program
 
                 case 6:
                     people.Add(CreateNewPerson());
+                    GenerateFile("pessoas.csv", people);
                     break;
 
                 case 7:
@@ -44,6 +47,9 @@ internal class Program
                     break;
 
                 case 8:
+                    GenerateFile("categorias.csv", categories);
+                    GenerateFile("pessoas.csv", people);
+                    GenerateFile("tarefas.csv", toDoList);
                     Thread.Sleep(1000);
                     Console.WriteLine("Obrigado por utilizar os nossos serviços!");
                     Environment.Exit(0);
@@ -157,5 +163,47 @@ internal class Program
         string name = Console.ReadLine();
         Person person = new(name);
         return person;
+    }
+
+    private static void GenerateFile(string path, List<string> categories)
+    {
+        if (categories.Count == 0)
+        {
+            return;
+        }
+
+        StreamWriter sw = new StreamWriter(path);
+        foreach (string category in categories)
+        {
+            sw.WriteLine(category);
+        }
+        sw.Close();
+    }
+    private static void GenerateFile(string path, List<Person> people)
+    {
+        if (people.Count == 0)
+        {
+            return;
+        }
+        StreamWriter sw = new StreamWriter(path);
+        foreach (Person person in people)
+        {
+            sw.WriteLine(person.ToString());
+        }
+        sw.Close();
+    }
+    private static void GenerateFile(string path, List<Todo> toDoList)
+    {
+        if (toDoList.Count == 0)
+        {
+            return;
+        }
+
+        StreamWriter sw = new StreamWriter(path);
+        foreach (Todo toDo in toDoList)
+        {
+            sw.WriteLine(toDo.ToFile());
+        }
+        sw.Close();
     }
 }
