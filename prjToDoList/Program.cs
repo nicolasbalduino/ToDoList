@@ -165,11 +165,9 @@ internal class Program
 
     private static void PrintPerson(List<Person> people)
     {
+        Console.WriteLine("Pessoas cadastradas:");
         foreach (var item in people)
-        {
-            Console.WriteLine("Pessoas cadastradas:");
             Console.WriteLine(item.ToString());
-        }
     }
 
     private static Person CreateNewPerson()
