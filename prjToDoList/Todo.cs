@@ -29,7 +29,7 @@ namespace prjToDoList
 
         public override string ToString()
         {
-            return  $"ID: {this.Id}" +
+            return  $"\nID: {this.Id}" +
                     $"\nDescrição: {this.Description}" +
                     $"\nCategoria: {this.Category}" +
                     $"\nDono: {this.Owner}" +
