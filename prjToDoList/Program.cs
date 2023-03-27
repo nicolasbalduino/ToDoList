@@ -46,6 +46,7 @@ internal class Program
                     Environment.Exit(0);
                     break;
             }
+
             Console.WriteLine("\nDigite uma tecla para continuar...");
             Console.ReadLine();
         }
