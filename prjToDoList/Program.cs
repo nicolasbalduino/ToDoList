@@ -1,13 +1,15 @@
+using Microsoft.VisualBasic;
 using prjToDoList;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
 internal class Program
 {
     private static void Main(string[] args)
     {
-        List<string> categories = new List<string>();
-        List<Person> people = new List<Person>();
-        List<Todo> toDoList = new List<Todo>();
+        List<string> categories = LoadFileCategories();
+        List<Person> people = LoadFilePeople();
+        List<Todo> toDoList = LoadFileToDo(people);
 
         do
         {
@@ -206,5 +208,71 @@ internal class Program
             sw.WriteLine(toDo.ToFile());
         }
         sw.Close();
+    }
+
+    private static List<string> LoadFileCategories()
+    {
+        List<string> categories = new List<string>();
+        
+        if (!File.Exists("categorias.csv"))
+            return categories;
+
+        StreamReader sr = new StreamReader("categorias.csv");
+        while (!sr.EndOfStream)
+        {
+            categories.Add(sr.ReadLine());
+        }
+        sr.Close();
+
+        return categories;
+    }
+
+    private static List<Person> LoadFilePeople()
+    {
+        List<Person> people = new List<Person>();
+
+        if (!File.Exists("pessoas.csv"))
+            return people;
+
+        StreamReader sr = new StreamReader("pessoas.csv");
+        while (!sr.EndOfStream)
+        {
+            string[] prop = sr.ReadLine().Split('|');
+            
+            //Guid id = Guid.Parse(prop[0]);
+            string name = prop[0];
+            
+            people.Add(new(name));
+        }
+        sr.Close();
+
+        return people;
+    }
+
+    private static List<Todo> LoadFileToDo(List<Person> people)
+    {
+        List<Todo> toDo = new List<Todo>();
+
+        if (!File.Exists("tarefas.csv"))
+            return toDo;
+
+        StreamReader sr = new StreamReader("tarefas.csv");
+        while (!sr.EndOfStream)
+        {
+            string[] prop = sr.ReadLine().Split('|');
+
+            Guid id = Guid.Parse(prop[0]);
+            string description = prop[1];
+            string category = prop[2];
+            Person owner = FindPerson(prop[3], people);
+            DateTime created = DateTime.Parse(prop[4]);
+            DateTime dueDate = DateTime.Parse(prop[5]);
+            bool status = bool.Parse(prop[6]);
+
+            toDo.Add(new(id, description, category, owner, created, dueDate, status));
+        }
+        sr.Close();
+
+        return toDo;
     }
 }
