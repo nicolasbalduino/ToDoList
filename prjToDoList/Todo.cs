@@ -27,6 +27,17 @@ namespace prjToDoList
             this.Status = false;
         }
 
+        public Todo(Guid id, string description, string category, Person? owner, DateTime created, DateTime? dueDate, bool status)
+        {
+            this.Id = id;
+            this.Description = description;
+            this.Category = category;
+            this.Owner = owner;
+            this.Created = created;
+            this.DueDate = dueDate;
+            this.Status = status;
+        }
+
         public override string ToString()
         {
             return  $"\nID: {this.Id}" +

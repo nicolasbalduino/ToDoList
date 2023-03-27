@@ -11,6 +11,12 @@
             this.Name = name;
         }
 
+        public Person(Guid id, string name)
+        {
+            this.Id = id;
+            this.Name = name;
+        }
+
         public Person SetName (string name)
         {
             this.Name = name;
