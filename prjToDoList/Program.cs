@@ -58,9 +58,6 @@ internal class Program
 
     }
 
-
-    }
-
     static int Menu()
     {
         Console.Clear();
@@ -82,7 +79,7 @@ internal class Program
         int.TryParse(Console.ReadLine(), out var option); // Retorno padrão é zero! caso seja falso.
         return option;
     }
-   
+
     //private static Todo CreateToDo()
     //{
     //    string description;
@@ -107,6 +104,7 @@ internal class Program
     {
         Console.Write("Digite o nome da nova categoria: ");
         return Console.ReadLine();
+    }
 
     private static void PrintTasks(List<Todo> toDoList)
     {
@@ -127,9 +125,10 @@ internal class Program
     }
 
     private static Person CreateNewPerson()
-    {        
+    {
         Console.Write("Digite o nome da pessoa:");
         string name = Console.ReadLine();
         Person person = new(name);
         return person;
+    }
 }
