@@ -32,6 +32,13 @@ internal class Program
                     break;
 
                 case 6:
+                    break;
+
+                case 7:
+                    break;
+
+                case 8:
+                    Thread.Sleep(1000);
                     Console.WriteLine("Obrigado por utilizar os nossos serviços!");
                     Environment.Exit(0);
                     break;
@@ -48,11 +55,12 @@ internal class Program
         Console.WriteLine("|        Selecione a opção desejada       |");
         Console.WriteLine("|_________________________________________|");
         Console.WriteLine("|                                         |");
-        Console.WriteLine("|     1 - Para cadastrar nova tarefa      |");
+        Console.WriteLine("|     1 - Cadastrar nova tarefa           |");
         Console.WriteLine("|     2 - Listar tarefas cadastradas      |");
         Console.WriteLine("|     3 - Alterar tarefa cadastrada       |");
-        Console.WriteLine("|     4 - Cadastrar uma nova pessoa       |");
-        Console.WriteLine("|     5 - ");
+        Console.WriteLine("|     4 - Cadastrar nova categoria        |");
+        Console.WriteLine("|     5 - Listar Categorias               |");
+        Console.WriteLine("|     6 - Cadastrar nova pessoa           |");
         Console.WriteLine("|     7 - Listar pessoas cadastradas      |");
         Console.WriteLine("|     8 - sair                            |");
         Console.WriteLine("|_________________________________________|");
