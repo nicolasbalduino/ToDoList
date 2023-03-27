@@ -18,7 +18,7 @@ internal class Program
                     break;
 
                 case 1:
-                    //toDoList.Add(CreateToDo());
+                    toDoList.Add(CreateToDo(categories, people));
                     break;
 
                 case 2:
@@ -79,12 +79,40 @@ internal class Program
         int.TryParse(Console.ReadLine(), out var option); // Retorno padrão é zero! caso seja falso.
         return option;
     }
+    private static Person FindPerson(string namePerson, List<Person> people)
+    {
+        if (people.Count == 0)
+            return null;
+        foreach (Person person in people)
+        {
+            if(namePerson == person.Name)
+                return person;
+        }
+        return null;
+    }
+    private static Todo CreateToDo(List<string> categories, List<Person> people)
+    {
+        string description;
+        string category;
+        Person owner;
+        DateTime dueDate;
 
-    //private static Todo CreateToDo()
-    //{
-    //    string description;
-    //    string category = "Importante";
-    //}
+        Console.WriteLine("Escreva a descrição da tarefa:");
+        description = Console.ReadLine();
+
+        ListCategories(categories);
+        Console.WriteLine("Escolha uma categoria:");
+        category = Console.ReadLine();
+
+        PrintPerson(people);
+        Console.WriteLine("Escolha um dono:");
+        owner = FindPerson(Console.ReadLine(), people);
+
+        Console.WriteLine("Escreva a possivel data de vencimento:");
+        dueDate = DateTime.Now.AddDays(10);
+
+        return new Todo(description, category, owner, dueDate);
+    }
 
     private static void ListCategories(List<string> categories)
     {
