@@ -30,6 +30,7 @@ internal class Program
                     break;
 
                 case 5:
+                    ListCategories(categories);
                     break;
 
                 case 6:
@@ -47,6 +48,19 @@ internal class Program
         }
         while (true);
 
+    }
+
+    private static void ListCategories(List<string> categories)
+    {
+        if (categories.Count == 0)
+        {
+            Console.WriteLine("Nenhuma categoria cadastrada!");
+        }
+
+        Console.WriteLine("Categorias:");
+
+        foreach (string category in categories)
+            Console.WriteLine(category);
     }
 
     private static string CreateCategory()
