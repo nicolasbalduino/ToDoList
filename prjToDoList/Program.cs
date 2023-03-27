@@ -344,11 +344,21 @@ internal class Program
                     Console.Write("Nova categoria para a tarefa selecionada: ");
                     category = Console.ReadLine();
                     taskToEdit.Category = category;
-                    Console.WriteLine("Mudanca de categoria confirmada!");
+                    Console.WriteLine("Mudança de categoria confirmada!");
                     Thread.Sleep(1600);
                     Console.Clear();
                     break;
+
                 case 3:
+                    Console.WriteLine("Nova data e hora para concluir este compromisso. (dd/MM/yyyy HH:mm)");
+                    newDueTime = DateTime.Parse(Console.ReadLine());
+                    taskToEdit.DueDate = newDueTime;
+                    Console.WriteLine("Data e hora final alteradas com sucesso!");
+                    Thread.Sleep(1600);
+                    Console.Clear();
+                    break;
+
+                case 4:
                     taskToEdit.SetStatus();
                     Console.WriteLine("Estado alterado com sucesso!");
                     Thread.Sleep(1600);
