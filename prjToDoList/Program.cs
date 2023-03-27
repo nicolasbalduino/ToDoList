@@ -17,6 +17,7 @@ internal class Program
                     break;
 
                 case 1:
+                    //toDoList.Add(CreateToDo());
                     break;
 
                 case 2:
@@ -45,16 +46,25 @@ internal class Program
                     Environment.Exit(0);
                     break;
             }
+            Console.WriteLine("\nDigite uma tecla para continuar...");
+            Console.ReadLine();
         }
         while (true);
 
     }
+
+    //private static Todo CreateToDo()
+    //{
+    //    string description;
+    //    string category = "Importante";
+    //}
 
     private static void ListCategories(List<string> categories)
     {
         if (categories.Count == 0)
         {
             Console.WriteLine("Nenhuma categoria cadastrada!");
+            return;
         }
 
         Console.WriteLine("Categorias:");
