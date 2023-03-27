@@ -1,4 +1,5 @@
 ﻿using prjToDoList;
+using System.Runtime.InteropServices;
 
 internal class Program
 {
@@ -20,6 +21,7 @@ internal class Program
                     break;
 
                 case 2:
+                    PrintTasks(toDoList);
                     break;
 
                 case 3:
@@ -32,9 +34,11 @@ internal class Program
                     break;
 
                 case 6:
+                    people.Add(CreateNewPerson());
                     break;
 
                 case 7:
+                    PrintPerson(people);
                     break;
 
                 case 8:
@@ -47,6 +51,33 @@ internal class Program
         while (true);
 
     }
+
+    private static void PrintTasks(List<Todo> toDoList)
+    {
+        Console.WriteLine("Tarefas cadastradas");
+        foreach (var item in toDoList)
+        {
+            Console.WriteLine(toDoList.ToString());
+        }
+    }
+
+    private static void PrintPerson(List<Person> people)
+    {
+        foreach (var item in people)
+        {
+            Console.WriteLine("Pessoas cadastradas:");
+            Console.WriteLine(people.ToString());
+        }
+    }
+
+    private static Person CreateNewPerson()
+    {        
+        Console.Write("Digite o nome da pessoa:");
+        string name = Console.ReadLine();
+        Person person = new(name);
+        return person;
+    }
+
     static int Menu()
     {
         Console.Clear();
