@@ -40,18 +40,18 @@ namespace prjToDoList
 
         public string ToFile()
         {
-            return  $"{Id}|{this.Description}|{this.Category}|{this.Owner}|" +
+            return  $"{this.Id}|{this.Description}|{this.Category}|{this.Owner}|" +
                     $"{this.Created}|{this.DueDate}|{this.Status}";
         }
 
         public bool SetStatus()
         {
-            return Status == false ? true : false;
+            return this.Status == false ? true : false;
         }
 
-        public Person SetPerson()
+        public void SetPerson(Person newOwner)
         {
-            return Owner;
+            this.Owner = newOwner;
         }
     }
 }
