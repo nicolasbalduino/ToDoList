@@ -65,7 +65,7 @@ internal class Program
         Console.WriteLine("|     8 - sair                            |");
         Console.WriteLine("|_________________________________________|");
 
-        if (!int.TryParse(Console.ReadLine(), out var option))        
-            return option;       
+        int.TryParse(Console.ReadLine(), out var option); // Retorno padrão é zero! caso seja falso.
+        return option;
     }
 }
