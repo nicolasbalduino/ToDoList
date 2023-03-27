@@ -8,6 +8,10 @@ internal class Program
         List<Person> people = new List<Person>();
         List<Todo> toDoList = new List<Todo>();
 
+        
+        string path = @"C:\\Users\\" + Environment.UserName;        
+       
+
         do
         {
             switch (Menu())
@@ -47,9 +51,9 @@ internal class Program
                     break;
 
                 case 8:
-                    GenerateFile("categorias.csv", categories);
-                    GenerateFile("pessoas.csv", people);
-                    GenerateFile("tarefas.csv", toDoList);
+                    GenerateFile(path + @"\\categorias.csv", categories);
+                    GenerateFile(path + @"\\pessoas.csv", people);
+                    GenerateFile(path + @"\\tarefas.csv", toDoList);
                     Thread.Sleep(1000);
                     Console.WriteLine("Obrigado por utilizar os nossos serviços!");
                     Environment.Exit(0);
