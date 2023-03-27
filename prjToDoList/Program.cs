@@ -52,18 +52,12 @@ internal class Program
         Console.WriteLine("|     2 - Listar tarefas cadastradas      |");
         Console.WriteLine("|     3 - Alterar tarefa cadastrada       |");
         Console.WriteLine("|     4 - Cadastrar uma nova pessoa       |");
-        Console.WriteLine("|     5 - Listar pessoas cadastradas      |");
-        Console.WriteLine("|     6 - sair                            |");
+        Console.WriteLine("|     5 - ");
+        Console.WriteLine("|     7 - Listar pessoas cadastradas      |");
+        Console.WriteLine("|     8 - sair                            |");
         Console.WriteLine("|_________________________________________|");
 
-        if (!int.TryParse(Console.ReadLine(), out var option))
-        {
-            Console.WriteLine("Tente novamente!");
-            return -1;
-        }
-        else
-        {
-            return option;
-        }
+        if (!int.TryParse(Console.ReadLine(), out var option))        
+            return option;       
     }
 }
