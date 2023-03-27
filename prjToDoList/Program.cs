@@ -1,7 +1,5 @@
-using Microsoft.VisualBasic;
 using prjToDoList;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
+
 
 internal class Program
 {
@@ -142,8 +140,8 @@ internal class Program
         Console.WriteLine("Escolha um dono:");
         owner = FindPerson(Console.ReadLine(), people);
 
-        Console.WriteLine("Escreva a possivel data de vencimento:");
-        dueDate = DateTime.Now.AddDays(10);
+        Console.WriteLine("Escreva a possivel data de vencimento: (dd/MM/yyyy HH:mm) ");
+        dueDate = DateTime.Parse(Console.ReadLine());
 
         return new Todo(description, category, owner, dueDate);
     }
@@ -322,11 +320,14 @@ internal class Program
             Console.WriteLine("|                                    |");
             Console.WriteLine("|    2 - Mudar categoria             |");
             Console.WriteLine("|                                    |");
-            Console.WriteLine("|    3 - Mudar estado da tarefa.     |");
+            Console.WriteLine("|    3 - Mudar data final da tarefa. |");
+            Console.WriteLine("|                                    |");
+            Console.WriteLine("|    4 - Mudar estado da tarefa.     |");
             Console.WriteLine("|____________________________________|");
             int option = int.Parse(Console.ReadLine());
             string description = "";
             string category = "";
+            DateTime newDueTime;
 
             switch (option)
             {
