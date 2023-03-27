@@ -26,6 +26,7 @@ internal class Program
                     break;
 
                 case 4:
+                    categories.Add(CreateCategory());
                     break;
 
                 case 5:
@@ -47,6 +48,13 @@ internal class Program
         while (true);
 
     }
+
+    private static string CreateCategory()
+    {
+        Console.Write("Digite o nome da nova categoria: ");
+        return Console.ReadLine();
+    }
+
     static int Menu()
     {
         Console.Clear();
