@@ -55,9 +55,17 @@ namespace prjToDoList
                     $"{this.Created}|{this.DueDate}|{this.Status}";
         }
 
-        public bool SetStatus()
+        public void SetStatus()
         {
-            return this.Status == false ? true : false;
+            if(this.Status == false)
+            {
+                this.Status = true;
+            }
+            else
+            {
+                this.Status = false;
+            }
+            //return this.Status == false ? true : false;
         }
 
         public void SetPerson(Person newOwner)

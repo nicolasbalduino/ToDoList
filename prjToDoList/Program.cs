@@ -40,6 +40,7 @@ internal class Program
                     break;
 
                 case 3:
+                    EditTodo(toDoList);
                     break;
 
                 case 4:
@@ -285,5 +286,57 @@ internal class Program
         sr.Close();
 
         return toDo;
+    }
+
+    private static void EditTodo(List<Todo> todo)
+    {
+        PrintTasks(todo);
+        Console.Write("Esolha a tarefa passando o ID: ");
+        string id = Console.ReadLine();
+        Todo taskToEdit = FindToDo(todo, id);
+        Console.WriteLine(taskToEdit.ToString());
+        Console.WriteLine("1 - Editar descrição\n" +
+                          "2 - Editar categoria\n" +
+                          "3 - Concluir tarefa.");
+        int option = int.Parse(Console.ReadLine());
+        string description = "";
+        string category = "";
+
+        switch (option)
+        {
+            case 1:
+                Console.Write("Nova descrição:");
+                description = Console.ReadLine();
+                taskToEdit.Description = description;
+                break;
+
+            case 2:
+                Console.Write("Nova categoria:");
+                category = Console.ReadLine();
+                taskToEdit.Category = category;
+                break;
+            case 3:
+                taskToEdit.SetStatus();
+                Thread.Sleep(1000);
+                Console.WriteLine("Tarefa concluída com sucesso!");
+                break;
+
+            default:
+                Console.WriteLine("Opção não encontrada!");
+                break;
+        }
+        PrintTasks(todo);
+    }
+
+    private static Todo FindToDo(List<Todo> todo, string id)
+    {
+        foreach (Todo item in todo)
+        {
+            if(Guid.Parse(id) == item.Id)
+            {
+                return item;
+            }
+        }
+        return null;
     }
 }
