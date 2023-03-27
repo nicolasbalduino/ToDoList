@@ -1,4 +1,5 @@
-﻿using prjToDoList;
+using prjToDoList;
+using System.Runtime.InteropServices;
 
 internal class Program
 {
@@ -21,6 +22,7 @@ internal class Program
                     break;
 
                 case 2:
+                    PrintTasks(toDoList);
                     break;
 
                 case 3:
@@ -35,9 +37,11 @@ internal class Program
                     break;
 
                 case 6:
+                    people.Add(CreateNewPerson());
                     break;
 
                 case 7:
+                    PrintPerson(people);
                     break;
 
                 case 8:
@@ -54,6 +58,31 @@ internal class Program
 
     }
 
+
+    }
+
+    static int Menu()
+    {
+        Console.Clear();
+        Console.WriteLine(" _________________________________________");
+        Console.WriteLine("|                                         |");
+        Console.WriteLine("|        Selecione a opção desejada       |");
+        Console.WriteLine("|_________________________________________|");
+        Console.WriteLine("|                                         |");
+        Console.WriteLine("|     1 - Cadastrar nova tarefa           |");
+        Console.WriteLine("|     2 - Listar tarefas cadastradas      |");
+        Console.WriteLine("|     3 - Alterar tarefa cadastrada       |");
+        Console.WriteLine("|     4 - Cadastrar nova categoria        |");
+        Console.WriteLine("|     5 - Listar Categorias               |");
+        Console.WriteLine("|     6 - Cadastrar nova pessoa           |");
+        Console.WriteLine("|     7 - Listar pessoas cadastradas      |");
+        Console.WriteLine("|     8 - sair                            |");
+        Console.WriteLine("|_________________________________________|");
+
+        int.TryParse(Console.ReadLine(), out var option); // Retorno padrão é zero! caso seja falso.
+        return option;
+    }
+   
     //private static Todo CreateToDo()
     //{
     //    string description;
@@ -78,27 +107,29 @@ internal class Program
     {
         Console.Write("Digite o nome da nova categoria: ");
         return Console.ReadLine();
-    }
 
-    static int Menu()
+    private static void PrintTasks(List<Todo> toDoList)
     {
-        Console.Clear();
-        Console.WriteLine(" _________________________________________");
-        Console.WriteLine("|                                         |");
-        Console.WriteLine("|        Selecione a opção desejada       |");
-        Console.WriteLine("|_________________________________________|");
-        Console.WriteLine("|                                         |");
-        Console.WriteLine("|     1 - Cadastrar nova tarefa           |");
-        Console.WriteLine("|     2 - Listar tarefas cadastradas      |");
-        Console.WriteLine("|     3 - Alterar tarefa cadastrada       |");
-        Console.WriteLine("|     4 - Cadastrar nova categoria        |");
-        Console.WriteLine("|     5 - Listar Categorias               |");
-        Console.WriteLine("|     6 - Cadastrar nova pessoa           |");
-        Console.WriteLine("|     7 - Listar pessoas cadastradas      |");
-        Console.WriteLine("|     8 - sair                            |");
-        Console.WriteLine("|_________________________________________|");
-
-        int.TryParse(Console.ReadLine(), out var option); // Retorno padrão é zero! caso seja falso.
-        return option;
+        Console.WriteLine("Tarefas cadastradas");
+        foreach (var item in toDoList)
+        {
+            Console.WriteLine(toDoList.ToString());
+        }
     }
+
+    private static void PrintPerson(List<Person> people)
+    {
+        foreach (var item in people)
+        {
+            Console.WriteLine("Pessoas cadastradas:");
+            Console.WriteLine(people.ToString());
+        }
+    }
+
+    private static Person CreateNewPerson()
+    {        
+        Console.Write("Digite o nome da pessoa:");
+        string name = Console.ReadLine();
+        Person person = new(name);
+        return person;
 }
