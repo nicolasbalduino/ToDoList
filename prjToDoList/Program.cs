@@ -1,6 +1,4 @@
-using Microsoft.VisualBasic;
 using prjToDoList;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
 internal class Program
@@ -10,6 +8,10 @@ internal class Program
         List<string> categories = LoadFileCategories();
         List<Person> people = LoadFilePeople();
         List<Todo> toDoList = LoadFileToDo(people);
+
+        
+        string path = @"C:\\Users\\" + Environment.UserName;        
+       
 
         do
         {
@@ -50,9 +52,9 @@ internal class Program
                     break;
 
                 case 8:
-                    GenerateFile("categorias.csv", categories);
-                    GenerateFile("pessoas.csv", people);
-                    GenerateFile("tarefas.csv", toDoList);
+                    GenerateFile(path + @"\\categorias.csv", categories);
+                    GenerateFile(path + @"\\pessoas.csv", people);
+                    GenerateFile(path + @"\\tarefas.csv", toDoList);
                     Thread.Sleep(1000);
                     Console.WriteLine("Obrigado por utilizar os nossos serviços!");
                     Environment.Exit(0);
