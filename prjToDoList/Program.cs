@@ -13,14 +13,14 @@ internal class Program
         List<Person> people = LoadFilePeople(path + @"\\pessoas.csv");
         List<Todo> toDoList = LoadFileToDo(path + @"\\tarefas.csv", people);
 
-        if(people.Count == 0)
+        if (people.Count == 0)
         {
             people.Add(CreateNewPerson());
         }
         if (categories.Count == 0)
         {
             categories.Add(CreateCategory());
-        }            
+        }
 
         do
         {
@@ -31,33 +31,40 @@ internal class Program
                     break;
 
                 case 1:
+                    Console.Clear();
                     toDoList.Add(CreateToDo(categories, people));
                     GenerateFile(path + @"\\tarefas.csv", toDoList);
                     break;
 
                 case 2:
+                    Console.Clear();
                     PrintTasks(toDoList);
                     break;
 
                 case 3:
+                    Console.Clear();
                     EditTodo(toDoList);
                     break;
 
                 case 4:
+                    Console.Clear();
                     categories.Add(CreateCategory());
                     GenerateFile(path + @"\\categorias.csv", categories);
                     break;
 
                 case 5:
+                    Console.Clear();
                     ListCategories(categories);
                     break;
 
                 case 6:
+                    Console.Clear();
                     people.Add(CreateNewPerson());
                     GenerateFile(path + @"\\pessoas.csv", people);
                     break;
 
                 case 7:
+                    Console.Clear();
                     PrintPerson(people);
                     break;
 
@@ -87,12 +94,19 @@ internal class Program
         Console.WriteLine("|_________________________________________|");
         Console.WriteLine("|                                         |");
         Console.WriteLine("|     1 - Cadastrar nova tarefa           |");
+        Console.WriteLine("|                                         |");
         Console.WriteLine("|     2 - Listar tarefas cadastradas      |");
+        Console.WriteLine("|                                         |");
         Console.WriteLine("|     3 - Alterar tarefa cadastrada       |");
+        Console.WriteLine("|                                         |");
         Console.WriteLine("|     4 - Cadastrar nova categoria        |");
+        Console.WriteLine("|                                         |");
         Console.WriteLine("|     5 - Listar Categorias               |");
+        Console.WriteLine("|                                         |");
         Console.WriteLine("|     6 - Cadastrar nova pessoa           |");
+        Console.WriteLine("|                                         |");
         Console.WriteLine("|     7 - Listar pessoas cadastradas      |");
+        Console.WriteLine("|                                         |");
         Console.WriteLine("|     8 - sair                            |");
         Console.WriteLine("|_________________________________________|");
 
@@ -105,7 +119,7 @@ internal class Program
             return null;
         foreach (Person person in people)
         {
-            if(namePerson == person.Name)
+            if (namePerson == person.Name)
                 return person;
         }
         return null;
@@ -156,7 +170,7 @@ internal class Program
 
     private static void PrintTasks(List<Todo> toDoList)
     {
-        Console.WriteLine("Tarefas:");
+        Console.WriteLine("Tarefas cadastradas:");
         foreach (var item in toDoList)
         {
             Console.WriteLine(item.ToString());
@@ -165,14 +179,14 @@ internal class Program
 
     private static void PrintPerson(List<Person> people)
     {
-        Console.WriteLine("Pessoas cadastradas:");
+        Console.WriteLine("Pessoas cadastradas:\n");
         foreach (var item in people)
             Console.WriteLine(item.ToString());
     }
 
     private static Person CreateNewPerson()
     {
-        Console.Write("Digite o nome da pessoa:");
+        Console.Write("Digite o nome da pessoa: ");
         string name = Console.ReadLine();
         Person person = new(name);
         return person;
@@ -223,7 +237,7 @@ internal class Program
     private static List<string> LoadFileCategories(string fullpath)
     {
         List<string> categories = new List<string>();
-        
+
         if (!File.Exists(fullpath))
             return categories;
 
@@ -248,10 +262,10 @@ internal class Program
         while (!sr.EndOfStream)
         {
             string[] prop = sr.ReadLine().Split('|');
-            
+
             //Guid id = Guid.Parse(prop[0]);
             string name = prop[0];
-            
+
             people.Add(new(name));
         }
         sr.Close();
@@ -288,49 +302,76 @@ internal class Program
 
     private static void EditTodo(List<Todo> todo)
     {
+
         PrintTasks(todo);
         Console.Write("Esolha a tarefa passando o ID: ");
         string id = Console.ReadLine();
+        Console.Clear();
+
         Todo taskToEdit = FindToDo(todo, id);
         Console.WriteLine(taskToEdit.ToString());
-        Console.WriteLine("1 - Editar descrição\n" +
-                          "2 - Editar categoria\n" +
-                          "3 - Concluir tarefa.");
-        int option = int.Parse(Console.ReadLine());
-        string description = "";
-        string category = "";
-
-        switch (option)
+        string reEdit = "";
+        do
         {
-            case 1:
-                Console.Write("Nova descrição:");
-                description = Console.ReadLine();
-                taskToEdit.Description = description;
-                break;
+            Console.WriteLine("_____________________________________");
+            Console.WriteLine("|                                    |");
+            Console.WriteLine("|     Selecione a opção desejada:    |");
+            Console.WriteLine("|____________________________________|");
+            Console.WriteLine("|                                    |");
+            Console.WriteLine("|    1 - Mudar descrição             |");
+            Console.WriteLine("|                                    |");
+            Console.WriteLine("|    2 - Mudar categoria             |");
+            Console.WriteLine("|                                    |");
+            Console.WriteLine("|    3 - Mudar estado da tarefa.     |");
+            Console.WriteLine("|____________________________________|");
+            int option = int.Parse(Console.ReadLine());
+            string description = "";
+            string category = "";
 
-            case 2:
-                Console.Write("Nova categoria:");
-                category = Console.ReadLine();
-                taskToEdit.Category = category;
-                break;
-            case 3:
-                taskToEdit.SetStatus();
-                Thread.Sleep(1000);
-                Console.WriteLine("Tarefa concluída com sucesso!");
-                break;
+            switch (option)
+            {
+                case 1:
+                    Console.WriteLine("Digite uma nova descrição para a tarefa selecionada: ");
+                    description = Console.ReadLine();
+                    taskToEdit.Description = description;
+                    Console.WriteLine("Descrição alterada com sucesso!");
+                    Thread.Sleep(1600);
+                    Console.Clear();
+                    break;
 
-            default:
-                Console.WriteLine("Opção não encontrada!");
-                break;
+                case 2:
+                    Console.Write("Nova categoria para a tarefa selecionada: ");
+                    category = Console.ReadLine();
+                    taskToEdit.Category = category;
+                    Console.WriteLine("Mudanca de categoria confirmada!");
+                    Thread.Sleep(1600);
+                    Console.Clear();
+                    break;
+                case 3:
+                    taskToEdit.SetStatus();
+                    Console.WriteLine("Estado alterado com sucesso!");
+                    Thread.Sleep(1600);
+                    Console.Clear();
+                    break;
+
+                default:
+                    Console.WriteLine("Opção não encontrada!");
+                    break;
+            }
+            PrintTasks(todo);
+            Console.WriteLine("\n\nDeseja realizar outra alteração nesta tarefa?\n" +
+                "Digite (s) para editar ou qualquer outra tecla para continuar. ");
+            reEdit = Console.ReadLine().ToLower();
         }
-        PrintTasks(todo);
+        while (reEdit == "s");
+
     }
 
     private static Todo FindToDo(List<Todo> todo, string id)
     {
         foreach (Todo item in todo)
         {
-            if(Guid.Parse(id) == item.Id)
+            if (Guid.Parse(id) == item.Id)
             {
                 return item;
             }
