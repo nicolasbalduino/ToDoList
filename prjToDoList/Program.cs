@@ -1,5 +1,6 @@
 using Microsoft.VisualBasic;
 using prjToDoList;
+using System.Globalization;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
@@ -142,8 +143,8 @@ internal class Program
         Console.WriteLine("Escolha um dono:");
         owner = FindPerson(Console.ReadLine(), people);
 
-        Console.WriteLine("Escreva a possivel data de vencimento:");
-        dueDate = DateTime.Now.AddDays(10);
+        Console.WriteLine("Escreva a possivel data de vencimento: (dd/MM/yyyy HH:mm) ");
+        dueDate = DateTime.Parse(Console.ReadLine());
 
         return new Todo(description, category, owner, dueDate);
     }
@@ -322,11 +323,14 @@ internal class Program
             Console.WriteLine("|                                    |");
             Console.WriteLine("|    2 - Mudar categoria             |");
             Console.WriteLine("|                                    |");
-            Console.WriteLine("|    3 - Mudar estado da tarefa.     |");
+            Console.WriteLine("|    3 - Mudar data final da tarefa. |");
+            Console.WriteLine("|                                    |");
+            Console.WriteLine("|    4 - Mudar estado da tarefa.     |");
             Console.WriteLine("|____________________________________|");
             int option = int.Parse(Console.ReadLine());
             string description = "";
             string category = "";
+            DateTime newDueTime;
 
             switch (option)
             {
@@ -343,11 +347,21 @@ internal class Program
                     Console.Write("Nova categoria para a tarefa selecionada: ");
                     category = Console.ReadLine();
                     taskToEdit.Category = category;
-                    Console.WriteLine("Mudanca de categoria confirmada!");
+                    Console.WriteLine("Mudança de categoria confirmada!");
                     Thread.Sleep(1600);
                     Console.Clear();
                     break;
+
                 case 3:
+                    Console.WriteLine("Nova data e hora para concluir este compromisso. (dd/MM/yyyy HH:mm)");
+                    newDueTime = DateTime.Parse(Console.ReadLine());
+                    taskToEdit.DueDate = newDueTime;
+                    Console.WriteLine("Data e hora final alteradas com sucesso!");
+                    Thread.Sleep(1600);
+                    Console.Clear();
+                    break;
+
+                case 4:
                     taskToEdit.SetStatus();
                     Console.WriteLine("Estado alterado com sucesso!");
                     Thread.Sleep(1600);
