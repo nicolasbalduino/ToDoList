@@ -359,10 +359,40 @@ internal class Program
                     break;
 
                 case 4:
-                    taskToEdit.SetStatus();
-                    Console.WriteLine("Estado alterado com sucesso!");
-                    Thread.Sleep(1600);
-                    Console.Clear();
+                    int actualStatus;
+                    do
+                    {
+                        Console.WriteLine("Gostaria de alterar o estado /  situação da tarefa atual?");
+                        Console.WriteLine("_____________________________________");
+                        Console.WriteLine("|                                    |");
+                        Console.WriteLine("|     Selecione a opção desejada:    |");
+                        Console.WriteLine("|____________________________________|");
+                        Console.WriteLine("|                                    |");
+                        Console.WriteLine("|    1 - Confirmar alteração         |");
+                        Console.WriteLine("|                                    |");
+                        Console.WriteLine("|    2 - Voltar ao menu anterior     |");
+                        Console.WriteLine("|____________________________________|");
+
+
+                        int.TryParse(Console.ReadLine(), out actualStatus);
+                        if (actualStatus == 1)
+                        {
+                            taskToEdit.SetStatus();
+                            Console.WriteLine("Estado alterado com sucesso!");
+                            Console.Clear();
+                            Thread.Sleep(1600);
+                        }
+                        else if (actualStatus == 2)
+                        {
+                            
+                        }
+                        else
+                        {
+                            Console.WriteLine("Opção inválida!!");
+                        }
+
+                    }
+                    while (actualStatus < 1 || actualStatus > 2);
                     break;
 
                 default:
